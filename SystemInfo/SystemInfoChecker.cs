@@ -17,7 +17,7 @@ public class SystemInfoChecker
 
     public SystemInfoChecker()
     {
-        _cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility","_Total", true);
+        _cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
         _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
         _cpuInfo = RetrieveCpuInfo();
         _totalRam = Double.Round(RetrieveTotalRam());
@@ -26,24 +26,24 @@ public class SystemInfoChecker
     private string RetrieveCpuInfo()
     {
         var cpu =
-            new ManagementObjectSearcher( "select * from Win32_Processor" )
+            new ManagementObjectSearcher("select * from Win32_Processor")
                 .Get()
                 .Cast<ManagementObject>()
                 .First();
-        
+
         var name = (string)cpu["Name"];
         var cores = (uint)cpu["NumberOfCores"];
         var threads = (uint)cpu["NumberOfLogicalProcessors"];
-        
-        name =  name
-                .Replace( "(TM)", "™" )
-                .Replace( "(tm)", "™" )
-                .Replace( "(R)", "®" )
-                .Replace( "(r)", "®" )
-                .Replace( "(C)", "©" )
-                .Replace( "(c)", "©" )
-                .Replace( "    ", " " )
-                .Replace( "  ", " " );
+
+        name = name
+            .Replace("(TM)", "™")
+            .Replace("(tm)", "™")
+            .Replace("(R)", "®")
+            .Replace("(r)", "®")
+            .Replace("(C)", "©")
+            .Replace("(c)", "©")
+            .Replace("    ", " ")
+            .Replace("  ", " ");
         return $"{name}\nCores: {cores} Threads: {threads}";
     }
 
@@ -66,10 +66,11 @@ public class SystemInfoChecker
     {
         return _totalRam;
     }
+
     private double RetrieveTotalRam()
     {
         var ram =
-            new ManagementObjectSearcher( "Select * From Win32_ComputerSystem" )
+            new ManagementObjectSearcher("Select * From Win32_ComputerSystem")
                 .Get()
                 .Cast<ManagementObject>()
                 .First();
@@ -81,7 +82,7 @@ public class SystemInfoChecker
     {
         const long bytesInGigabytes = 1073741824;
         List<DriveData> result = new List<DriveData>();
-        
+
         DriveInfo[] allDrives = DriveInfo.GetDrives();
 
         foreach (DriveInfo d in allDrives)
@@ -97,7 +98,115 @@ public class SystemInfoChecker
                 drive.Name = d.Name;
                 drive.DriveType = d.DriveType.ToString();
             }
+
             result.Add(drive);
+        }
+
+        return result;
+    }
+
+    public List<AntivirusData> GetSystemAntivirus()
+    {
+        var antivirusData =
+            new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT * FROM AntiVirusProduct")
+                .Get()
+                .Cast<ManagementObject>();
+
+        List<AntivirusData> result = new List<AntivirusData>();
+        foreach (ManagementObject virusChecker in antivirusData)
+        {
+            var name = (string)virusChecker["displayName"];
+            var instanceGuid = (string)virusChecker["instanceGuid"];
+            var pathToSignedProductExe = (string)virusChecker["pathToSignedProductExe"];
+            var pathToSignedReportingExe = (string)virusChecker["pathToSignedReportingExe"];
+            var timestamp = (string)virusChecker["timestamp"];
+            var productState = (uint)virusChecker["productState"];
+            bool upToDate;
+            bool enabled;
+            switch (productState)
+            {
+                case 262144:
+                {
+                    upToDate = true;
+                    enabled = false;
+                    break;
+                }
+                case 266240:
+                {
+                    upToDate = true;
+                    enabled = true;
+                    break;
+                }
+                case 262160:
+                {
+                    upToDate = false;
+                    enabled = false;
+                    break;
+                }
+                case 266256:
+                {
+                    upToDate = false;
+                    enabled = true;
+                    break;
+                }
+                case 393216:
+                {
+                    upToDate = true;
+                    enabled = false;
+                    break;
+                }
+                case 393232:
+                {
+                    upToDate = false;
+                    enabled = false;
+                    break;
+                }
+                case 393488:
+                {
+                    upToDate = false;
+                    enabled = false;
+                    break;
+                }
+                case 397312:
+                {
+                    upToDate = true;
+                    enabled = true;
+                    break;
+                }
+                case 397328:
+                {
+                    upToDate = false;
+                    enabled = true;
+                    break;
+                }
+                case 393472:
+                {
+                    upToDate = true;
+                    enabled = false;
+                    break;
+                }
+                case 397584:
+                {
+                    upToDate = false;
+                    enabled = true;
+                    break;
+                }
+                case 397568:
+                {
+                    upToDate = true;
+                    enabled = true;
+                    break;
+                }
+                default:
+                {
+                    upToDate = false;
+                    enabled = false;
+                    break;
+                }
+            }
+
+            result.Add(new AntivirusData(name, instanceGuid, pathToSignedProductExe, pathToSignedReportingExe,
+                timestamp, upToDate, enabled));
         }
 
         return result;

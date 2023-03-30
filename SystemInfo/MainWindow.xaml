@@ -67,7 +67,9 @@
                                       Background="White"
                                       ColumnWidth="*"
                                       HorizontalContentAlignment="Stretch"
-                                      CanUserResizeColumns="False">
+                                      CanUserResizeColumns="False"
+                                      CanUserAddRows="False"
+                                      FontFamily="Tahoma, Comic Sans MS, Arial">
                             </DataGrid>
                             <Button Grid.Row="1"
                                     Grid.Column="0"
@@ -113,16 +115,31 @@
                 </TabItem.Header>
 
                 <TabItem.Content>
-                    <Grid ShowGridLines="True">
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        <TextBlock FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30" HorizontalAlignment="Center" Margin="15">Available Antivirus</TextBlock>
+                        <DataGrid Grid.Row="1" x:Name="AntivirusDataGrid"
+                                  MinRowHeight="30"
+                                  AutoGenerateColumns="True"
+                                  VerticalAlignment="Top"
+                                  Background="White"
+                                  HorizontalContentAlignment="Stretch"
+                                  ColumnWidth="*"
+                                  CanUserResizeColumns="True"
+                                  CanUserResizeRows="True"
+                                  FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                  CanUserAddRows="False">
+                        </DataGrid>
+                        <Button Grid.Row="1" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                            BorderThickness="2" VerticalAlignment="Bottom" Margin="30"
+                                            Click="RefreshAntivirusButtonOnClick" ClickMode="Press">
+                            Refresh antivirus info
+                        </Button>
                     </Grid>
+                    
                 </TabItem.Content>
             </TabItem>
             <TabItem x:Name="OsUpdatesInfo">

@@ -33,6 +33,7 @@ namespace SystemInfo
             timer.Start();
             CpuInfo.Text = _systemInfoChecker.GetCpuInfo();
             DriveData.ItemsSource = _systemInfoChecker.GetDrivesInfo();
+            AntivirusDataGrid.ItemsSource = _systemInfoChecker.GetSystemAntivirus();
         }
 
         private void UpdateSystemData(object? sender, EventArgs e)
@@ -48,6 +49,11 @@ namespace SystemInfo
         private void RefreshDrivesButtonOnClick(object sender, RoutedEventArgs e)
         {
             DriveData.ItemsSource = _systemInfoChecker.GetDrivesInfo();
+        }
+
+        private void RefreshAntivirusButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            AntivirusDataGrid.ItemsSource = _systemInfoChecker.GetSystemAntivirus();
         }
     }
 }
