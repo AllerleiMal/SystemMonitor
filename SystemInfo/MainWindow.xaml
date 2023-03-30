@@ -144,19 +144,33 @@
             </TabItem>
             <TabItem x:Name="OsUpdatesInfo">
                 <TabItem.Header>
-                    <TextBlock Margin="3">OS Updates</TextBlock>
+                    <TextBlock Margin="3">OS Details</TextBlock>
                 </TabItem.Header>
 
                 <TabItem.Content>
-                    <Grid ShowGridLines="True">
+                    <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30" HorizontalAlignment="Center" Margin="15">Operating System Details:</TextBlock>
+                        <TextBlock Grid.Row="1" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15" HorizontalAlignment="Left" x:Name="OsVersionDesc" Margin="30 0 0 0"></TextBlock>
+                        <DataGrid Grid.Row="2" x:Name="OsUpdatesDataGrid"
+                                  AutoGenerateColumns="True"
+                                  VerticalAlignment="Top"
+                                  Background="White"
+                                  HorizontalContentAlignment="Stretch"
+                                  ColumnWidth="*"
+                                  FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                  CanUserAddRows="False">
+                        </DataGrid>
+                        <Button Grid.Row="3" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                BorderThickness="2" VerticalAlignment="Bottom" Margin="10"
+                                Click="RefreshUpdatesButtonOnClick" ClickMode="Press">
+                            Refresh updates info
+                        </Button>
                     </Grid>
                 </TabItem.Content>
             </TabItem>

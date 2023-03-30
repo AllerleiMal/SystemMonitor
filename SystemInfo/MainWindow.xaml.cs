@@ -23,10 +23,12 @@ namespace SystemInfo
     public partial class MainWindow : Window
     {
         private SystemInfoChecker _systemInfoChecker;
+        private OsInfo _osInfo;
         public MainWindow()
         {
             InitializeComponent();
             _systemInfoChecker = new SystemInfoChecker();
+            _osInfo = new OsInfo();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += UpdateSystemData;
@@ -34,6 +36,8 @@ namespace SystemInfo
             CpuInfo.Text = _systemInfoChecker.GetCpuInfo();
             DriveData.ItemsSource = _systemInfoChecker.GetDrivesInfo();
             AntivirusDataGrid.ItemsSource = _systemInfoChecker.GetSystemAntivirus();
+            OsUpdatesDataGrid.ItemsSource = _osInfo.Updates;
+            OsVersionDesc.Text = _osInfo.ToString();
         }
 
         private void UpdateSystemData(object? sender, EventArgs e)
@@ -54,6 +58,13 @@ namespace SystemInfo
         private void RefreshAntivirusButtonOnClick(object sender, RoutedEventArgs e)
         {
             AntivirusDataGrid.ItemsSource = _systemInfoChecker.GetSystemAntivirus();
+        }
+
+        private void RefreshUpdatesButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            _osInfo = new OsInfo();
+            OsUpdatesDataGrid.ItemsSource = _osInfo.Updates;
+            OsVersionDesc.Text = _osInfo.ToString();
         }
     }
 }
