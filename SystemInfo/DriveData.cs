@@ -7,8 +7,8 @@ public class DriveData
     public string Name { get; set; }
     public string DriveType { get; set; }
     public string FileSystem { get; set; }
-    public float AvailableSpaceGB { get; set; }
-    public float TotalDriveSizeGB { get; set; }
+    public float AvailableSpaceGb { get; set; }
+    public float TotalDriveSizeGb { get; set; }
     public string AvailableSizePercentage { get; set; }
 
     public DriveData()
@@ -21,8 +21,8 @@ public class DriveData
         Name = name;
         DriveType = driveType;
         FileSystem = fileSystem;
-        AvailableSpaceGB = availableSpace;
-        TotalDriveSizeGB = totalDriveSize;
-        AvailableSizePercentage = (AvailableSpaceGB / TotalDriveSizeGB).ToString("P");
+        AvailableSpaceGb = availableSpace;
+        TotalDriveSizeGb = totalDriveSize;
+        AvailableSizePercentage = (AvailableSpaceGb / TotalDriveSizeGb).ToString("P");
     }
 }

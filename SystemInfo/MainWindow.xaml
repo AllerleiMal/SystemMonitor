@@ -51,13 +51,13 @@
                         </Grid>
 
                         <!-- Disk Section -->
-                        <Grid ShowGridLines="True" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock FontSize="30" FontFamily="Tahoma, Comic Sans MS, Arial"
-                                       HorizontalAlignment="Center">
+                                       HorizontalAlignment="Center" Margin="10">
                                 Drives
                             </TextBlock>
                             <DataGrid Grid.Row="1"
@@ -73,12 +73,36 @@
                                     Grid.Column="0"
                                     Height="30" Width="150" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
                                     BorderThickness="2" VerticalAlignment="Bottom" Margin="10"
-                                    Click="RefreshDrivesButtonOnClick">
+                                    Click="RefreshDrivesButtonOnClick" ClickMode="Press">
                                 Refresh drives info
                             </Button>
                         </Grid>
                         
                         <!-- RAM Section -->
+                        
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock FontSize="30" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                       HorizontalAlignment="Center">
+                                RAM
+                            </TextBlock>
+                            <TextBlock Grid.Row="0" FontSize="15" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                       VerticalAlignment="Bottom" x:Name="RamInfo" Margin="20 20 20 10">
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" FontSize="20" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                       Margin="20 0 0 0">
+                                RAM Usage:
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" FontSize="20" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                       HorizontalAlignment="Right" x:Name="RamUsagePercentage" Margin="0 0 20 0">
+                            </TextBlock>
+                            <ProgressBar Background="#8EE9FA" BorderBrush="#7FFAC7" Grid.Row="1" Minimum="0"
+                                         Maximum="100" Value="0" Height="25" Margin="20" x:Name="RamUsage">
+                            </ProgressBar>
+                        </Grid>
                         
                     </Grid>
                 </TabItem.Content>

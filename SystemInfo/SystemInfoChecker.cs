@@ -13,12 +13,14 @@ public class SystemInfoChecker
     private PerformanceCounter _cpuCounter;
     private PerformanceCounter _ramCounter;
     private string _cpuInfo;
+    private double _totalRam;
 
     public SystemInfoChecker()
     {
         _cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility","_Total", true);
         _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
         _cpuInfo = RetrieveCpuInfo();
+        _totalRam = Double.Round(RetrieveTotalRam());
     }
 
     private string RetrieveCpuInfo()
@@ -58,6 +60,21 @@ public class SystemInfoChecker
     public float GetRamUsage()
     {
         return _ramCounter.NextValue();
+    }
+
+    public double GetTotalRam()
+    {
+        return _totalRam;
+    }
+    private double RetrieveTotalRam()
+    {
+        var ram =
+            new ManagementObjectSearcher( "Select * From Win32_ComputerSystem" )
+                .Get()
+                .Cast<ManagementObject>()
+                .First();
+
+        return Convert.ToDouble(ram["TotalPhysicalMemory"]) / 1048576;
     }
 
     public List<DriveData> GetDrivesInfo()

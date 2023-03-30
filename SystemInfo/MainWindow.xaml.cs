@@ -40,6 +40,9 @@ namespace SystemInfo
             var cpuData = _systemInfoChecker.GetCpuUsage();
             CpuUsagePercentage.Text = cpuData.ToString("0.00") + "%";
             CpuUsage.Value = cpuData;
+            RamUsage.Value = (1 - _systemInfoChecker.GetRamUsage() / _systemInfoChecker.GetTotalRam()) * 100;
+            RamUsagePercentage.Text = RamUsage.Value.ToString("0.00") + "%";
+            RamInfo.Text = $"Total: {_systemInfoChecker.GetTotalRam()} MB\nAvailable: {_systemInfoChecker.GetRamUsage()} MB";
         }
 
         private void RefreshDrivesButtonOnClick(object sender, RoutedEventArgs e)
