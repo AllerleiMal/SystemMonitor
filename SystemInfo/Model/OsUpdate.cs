@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WUApiLib;
 
-namespace SystemInfo;
+namespace SystemInfo.Model;
 
 public class OsUpdate
 {

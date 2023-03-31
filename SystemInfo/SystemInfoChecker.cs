@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Windows.Documents;
+using SystemInfo.Model;
 
 namespace SystemInfo;
 

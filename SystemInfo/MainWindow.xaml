@@ -79,9 +79,9 @@
                                 Refresh drives info
                             </Button>
                         </Grid>
-                        
+
                         <!-- RAM Section -->
-                        
+
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -105,7 +105,7 @@
                                          Maximum="100" Value="0" Height="25" Margin="20" x:Name="RamUsage">
                             </ProgressBar>
                         </Grid>
-                        
+
                     </Grid>
                 </TabItem.Content>
             </TabItem>
@@ -120,7 +120,10 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30" HorizontalAlignment="Center" Margin="15">Available Antivirus</TextBlock>
+                        <TextBlock FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30" HorizontalAlignment="Center"
+                                   Margin="15">
+                            Available Antivirus
+                        </TextBlock>
                         <DataGrid Grid.Row="1" x:Name="AntivirusDataGrid"
                                   MinRowHeight="30"
                                   AutoGenerateColumns="True"
@@ -133,13 +136,14 @@
                                   FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
                                   CanUserAddRows="False">
                         </DataGrid>
-                        <Button Grid.Row="1" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
-                                            BorderThickness="2" VerticalAlignment="Bottom" Margin="30"
-                                            Click="RefreshAntivirusButtonOnClick" ClickMode="Press">
+                        <Button Grid.Row="1" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                FontSize="15"
+                                BorderThickness="2" VerticalAlignment="Bottom" Margin="30"
+                                Click="RefreshAntivirusButtonOnClick" ClickMode="Press">
                             Refresh antivirus info
                         </Button>
                     </Grid>
-                    
+
                 </TabItem.Content>
             </TabItem>
             <TabItem x:Name="OsUpdatesInfo">
@@ -155,8 +159,13 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30" HorizontalAlignment="Center" Margin="15">Operating System Details:</TextBlock>
-                        <TextBlock Grid.Row="1" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15" HorizontalAlignment="Left" x:Name="OsVersionDesc" Margin="30 0 0 0"></TextBlock>
+                        <TextBlock Grid.Row="0" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30"
+                                   HorizontalAlignment="Center" Margin="15">
+                            Operating System Details
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                   HorizontalAlignment="Left" x:Name="OsVersionDesc" Margin="30 0 0 0">
+                        </TextBlock>
                         <DataGrid Grid.Row="2" x:Name="OsUpdatesDataGrid"
                                   AutoGenerateColumns="True"
                                   VerticalAlignment="Top"
@@ -164,9 +173,10 @@
                                   HorizontalContentAlignment="Stretch"
                                   ColumnWidth="*"
                                   FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
-                                  CanUserAddRows="False">
+                                  CanUserAddRows="False" Margin="10">
                         </DataGrid>
-                        <Button Grid.Row="3" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                        <Button Grid.Row="3" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                FontSize="15"
                                 BorderThickness="2" VerticalAlignment="Bottom" Margin="10"
                                 Click="RefreshUpdatesButtonOnClick" ClickMode="Press">
                             Refresh updates info
@@ -174,6 +184,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
+
             <TabItem x:Name="NetworkInfo">
                 <TabItem.Header>
                     <TextBlock Margin="3">Network</TextBlock>
@@ -182,13 +193,58 @@
                 <TabItem.Content>
                     <Grid ShowGridLines="True">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Row="0" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="30"
+                                   HorizontalAlignment="Center" Margin="15">
+                            Firewall Details
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                   HorizontalAlignment="Left" Margin="15" x:Name="FirewallDesc">
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="20"
+                                   HorizontalAlignment="Center">
+                            Port list
+                        </TextBlock>
+                        <DataGrid Grid.Row="3"
+                                  x:Name="FirewallPortsDataGrid"
+                                  AutoGenerateColumns="True"
+                                  VerticalAlignment="Center"
+                                  Background="White"
+                                  HorizontalContentAlignment="Stretch"
+                                  ColumnWidth="*"
+                                  FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                  CanUserAddRows="False">
+                        </DataGrid>
+                        <TextBlock Grid.Row="4" FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="20"
+                                   HorizontalAlignment="Center">
+                            App list
+                        </TextBlock>
+                        
+                        <DataGrid Grid.Row="5"
+                                  x:Name="FirewallAppsDataGrid"
+                                  AutoGenerateColumns="True"
+                                  VerticalAlignment="Center"
+                                  Background="White"
+                                  HorizontalContentAlignment="Stretch"
+                                  ColumnWidth="*"
+                                  FontFamily="Tahoma, Comic Sans MS, Arial" FontSize="15"
+                                  CanUserAddRows="False" Margin="10">
+                        </DataGrid>
+                        
+                        <Button Grid.Row="6" Height="50" Width="200" FontFamily="Tahoma, Comic Sans MS, Arial"
+                                FontSize="15"
+                                BorderThickness="2" VerticalAlignment="Bottom" Margin="10"
+                                Click="RefreshFirewallButtonOnClick" ClickMode="Press">
+                            Refresh firewall info
+                        </Button>
                     </Grid>
                 </TabItem.Content>
             </TabItem>

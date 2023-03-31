@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace SystemInfo;
+﻿namespace SystemInfo.Model;
 
 public class DriveData
 {

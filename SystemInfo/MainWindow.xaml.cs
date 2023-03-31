@@ -24,11 +24,13 @@ namespace SystemInfo
     {
         private SystemInfoChecker _systemInfoChecker;
         private OsInfo _osInfo;
+        private FirewallInfo _firewall;
         public MainWindow()
         {
             InitializeComponent();
             _systemInfoChecker = new SystemInfoChecker();
             _osInfo = new OsInfo();
+            InitializeFirewallData();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += UpdateSystemData;
@@ -38,6 +40,14 @@ namespace SystemInfo
             AntivirusDataGrid.ItemsSource = _systemInfoChecker.GetSystemAntivirus();
             OsUpdatesDataGrid.ItemsSource = _osInfo.Updates;
             OsVersionDesc.Text = _osInfo.ToString();
+        }
+
+        private void InitializeFirewallData()
+        {
+            _firewall = new FirewallInfo();
+            FirewallDesc.Text = $"Profile type: {_firewall.ProfileType}\nActive: {_firewall.IsEnabled}";
+            FirewallPortsDataGrid.ItemsSource = _firewall.Ports;
+            FirewallAppsDataGrid.ItemsSource = _firewall.Apps;
         }
 
         private void UpdateSystemData(object? sender, EventArgs e)
@@ -65,6 +75,11 @@ namespace SystemInfo
             _osInfo = new OsInfo();
             OsUpdatesDataGrid.ItemsSource = _osInfo.Updates;
             OsVersionDesc.Text = _osInfo.ToString();
+        }
+
+        private void RefreshFirewallButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            InitializeFirewallData();
         }
     }
 }
